@@ -15,9 +15,6 @@ import kotlinx.coroutines.withContext
 
 object UpdateCheckerManager {
     suspend fun checkForUpdate(includePreRelease: Boolean = false): CheckUpdateResult = withContext(Dispatchers.IO) {
-        if (!AppConfig.FORK_CHECK_UPDATES) {
-            return@withContext CheckUpdateResult(hasUpdate = false)
-        }
         val url = if (includePreRelease) {
             AppConfig.APP_API_URL
         } else {

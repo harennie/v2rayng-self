@@ -6,7 +6,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -17,51 +16,16 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.core.view.WindowCompat
 import com.v2ray.ang.AppConfig
-import com.v2ray.ang.R
 import com.v2ray.ang.handler.MmkvManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-
-private val ChengSans = FontFamily(
-    Font(R.font.instrument_sans_regular, FontWeight.Normal),
-    Font(R.font.instrument_sans_medium, FontWeight.Medium),
-)
-
-private val ChengSerif = FontFamily(
-    Font(R.font.instrument_serif_regular, FontWeight.Normal),
-)
-
-private fun chengTypography(): Typography {
-    val base = Typography()
-    return Typography(
-        displayLarge = base.displayLarge.copy(fontFamily = ChengSerif),
-        displayMedium = base.displayMedium.copy(fontFamily = ChengSerif),
-        displaySmall = base.displaySmall.copy(fontFamily = ChengSerif),
-        headlineLarge = base.headlineLarge.copy(fontFamily = ChengSerif),
-        headlineMedium = base.headlineMedium.copy(fontFamily = ChengSerif),
-        headlineSmall = base.headlineSmall.copy(fontFamily = ChengSerif),
-        titleLarge = base.titleLarge.copy(fontFamily = ChengSerif),
-        titleMedium = base.titleMedium.copy(fontFamily = ChengSans),
-        titleSmall = base.titleSmall.copy(fontFamily = ChengSans),
-        bodyLarge = base.bodyLarge.copy(fontFamily = ChengSans),
-        bodyMedium = base.bodyMedium.copy(fontFamily = ChengSans),
-        bodySmall = base.bodySmall.copy(fontFamily = ChengSans),
-        labelLarge = base.labelLarge.copy(fontFamily = ChengSans, fontWeight = FontWeight.Medium),
-        labelMedium = base.labelMedium.copy(fontFamily = ChengSans),
-        labelSmall = base.labelSmall.copy(fontFamily = ChengSans),
-    )
-}
 
 private val LightColor = lightColorScheme(
     primary = Color(0xFF1F3A34),
@@ -163,7 +127,7 @@ object ThemeManager {
     val themeMode: StateFlow<String> = _themeMode.asStateFlow()
 
     private val _dynamicColorEnabled = MutableStateFlow(
-        MmkvManager.decodeSettingsBool(AppConfig.PREF_DYNAMIC_COLOR, false)
+        MmkvManager.decodeSettingsBool(AppConfig.PREF_DYNAMIC_COLOR, true)
     )
     val dynamicColorEnabled: StateFlow<Boolean> = _dynamicColorEnabled.asStateFlow()
 
@@ -181,7 +145,7 @@ object ThemeManager {
         _themeMode.value =
             MmkvManager.decodeSettingsString(AppConfig.PREF_UI_MODE_NIGHT, "0") ?: "0"
         _dynamicColorEnabled.value =
-            MmkvManager.decodeSettingsBool(AppConfig.PREF_DYNAMIC_COLOR, false)
+            MmkvManager.decodeSettingsBool(AppConfig.PREF_DYNAMIC_COLOR, true)
     }
 }
 
@@ -230,10 +194,8 @@ fun AppTheme(
         LocalDarkTheme provides darkTheme,
         LocalAppSnackbar provides snackbarController
     ) {
-        val typography = remember { chengTypography() }
         MaterialTheme(
-            colorScheme = colorScheme,
-            typography = typography,
+            colorScheme = colorScheme
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 AppSnackbarBridge(controller = snackbarController)

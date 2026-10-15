@@ -127,8 +127,6 @@ object AppConfig {
     const val GITHUB_RAW_URL = "https://raw.githubusercontent.com"
     const val GITHUB_DOWNLOAD_URL = "$GITHUB_URL/%s/releases/latest/download"
     const val ANDROID_PACKAGE_NAME_LIST_URL = "$GITHUB_RAW_URL/2dust/androidpackagenamelist/master/proxy.txt"
-    /** Personal fork: upstream release APKs are a different app, so they are not offered as updates. */
-    const val FORK_CHECK_UPDATES = false
     const val APP_URL = "$GITHUB_URL/2dust/v2rayNG"
     const val APP_API_URL = "https://api.github.com/repos/2dust/v2rayNG/releases"
     const val APP_ISSUES_URL = "$APP_URL/issues"

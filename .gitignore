@@ -48,9 +48,6 @@ V2rayNG/app/google-services.json
 *.war
 *.ear
 
-# The Gradle wrapper jar is required to build.
-!V2rayNG/gradle/wrapper/gradle-wrapper.jar
-
 # Ignore executable files
 *.exe
 *.dll
@@ -70,8 +67,3 @@ V2rayNG/app/google-services.json
 # Ignore OS-specific files
 Thumbs.db
 .DS_Store
-
-# Local build output
-/libs/
-studio/node_modules/
-studio/.next/

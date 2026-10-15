@@ -116,12 +116,6 @@ fun AboutScreen(
                 versionText = versionText,
                 appIdText = appIdText
             )
-            Text(
-                text = stringResource(R.string.fork_credit),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
-            )
             NavigationBarsSpacer()
         }
     }

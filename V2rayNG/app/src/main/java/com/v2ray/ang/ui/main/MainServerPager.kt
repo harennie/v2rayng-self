@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,7 +25,6 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -36,7 +36,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -318,11 +317,6 @@ private fun ServerListItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 4.dp)
-            .clip(RoundedCornerShape(18.dp))
-            .background(
-                if (isSelected) MaterialTheme.colorScheme.surfaceContainerHigh else Color.Transparent
-            )
             .height(IntrinsicSize.Min)
             .semantics {
                 if (selectedStateDescription != null) {
@@ -331,10 +325,29 @@ private fun ServerListItem(
             }
             .clickable { actions.select(row.guid) }
     ) {
+        Box(
+            Modifier
+                .width(10.dp)
+                .fillMaxHeight()
+        ) {
+            if (isSelected) {
+                Row {
+                    Spacer(Modifier.width(6.dp))
+                    Box(
+                        Modifier
+                            .width(4.dp)
+                            .fillMaxHeight()
+                            .padding(vertical = 10.dp)
+                            .background(MaterialTheme.colorScheme.primary)
+                    )
+                }
+            }
+        }
+
         Column(
             Modifier
                 .weight(1f)
-                .padding(start = 16.dp, end = 8.dp, top = 10.dp, bottom = 10.dp)
+                .padding(start = 8.dp, end = 12.dp, top = 8.dp, bottom = 8.dp)
         ) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(row.remarks, Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge.copy(lineBreak = LineBreak.Paragraph), maxLines = 2, overflow = TextOverflow.Ellipsis)

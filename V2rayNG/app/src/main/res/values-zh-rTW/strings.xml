@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">澄</string>
-    <string name="cheng_connect">連線</string>
-    <string name="cheng_disconnect">斷開</string>
-    <string name="fork_credit">澄是 v2rayNG 的個人版本。核心與協議沿用上游專案，遵循 GPL-3.0。</string>
-    <string name="fork_credit_short">v2rayNG 的個人版本</string>
+    <string name="app_name" translatable="false">v2rayNG</string>
     <string name="app_widget_name">開關</string>
     <string name="app_tile_name">開關</string>
     <string name="app_tile_first_use">首次使用此功能，請使用此應用程式新增伺服器</string>
@@ -18,7 +14,7 @@
     <string name="pull_down_to_refresh">請下拉重新整理！</string>
 
     <!-- Notifications -->
-    <string name="notification_channel_service">澄 服務</string>
+    <string name="notification_channel_service">v2rayNG 服務</string>
     <string name="notification_channel_subscription_updates">訂閱更新</string>
     <string name="notification_channel_connection_checks">連線檢查</string>
     <string name="notification_action_stop_v2ray">停止</string>
