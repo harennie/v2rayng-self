@@ -1,12 +1,4 @@
-import dynamic from "next/dynamic";
-
-const ChengPreview = dynamic(
-  () => import("@/components/cheng-preview").then((mod) => mod.ChengPreview),
-  {
-    ssr: false,
-    loading: () => <div className="h-dvh w-full bg-[#f7f4ee] md:h-[844px] md:rounded-[36px]" />,
-  },
-);
+import { PreviewFrame } from "@/components/preview-frame";
 
 export default function Home() {
   return (
@@ -34,7 +26,7 @@ export default function Home() {
           </div>
         </dl>
       </section>
-      <ChengPreview />
+      <PreviewFrame />
     </main>
   );
 }
