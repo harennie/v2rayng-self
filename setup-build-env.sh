@@ -11,6 +11,7 @@ CMDLINE_REV="14742923"
 PACKAGES=(
   "platforms;android-37.0"
   "build-tools;37.0.0"
+  "build-tools;36.0.0"
   "platform-tools"
 )
 
