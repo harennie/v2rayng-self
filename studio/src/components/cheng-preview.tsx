@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { parseShareLinks } from "@/lib/share-link";
 
 type Server = {
@@ -66,6 +66,17 @@ function delayLabel(delay: number | null) {
   return `${delay} ms`;
 }
 
+type Persisted = { servers: Server[]; selectedId: string; dark: boolean };
+
+const fallbackPersisted: Persisted = {
+  servers: samples,
+  selectedId: "tokyo",
+  dark: false,
+};
+
+let clientPersisted: Persisted | null = null;
+const persistedListeners = new Set<() => void>();
+
 function isServer(value: unknown): value is Server {
   if (!value || typeof value !== "object") return false;
   const item = value as Partial<Server>;
@@ -79,7 +90,7 @@ function isServer(value: unknown): value is Server {
   );
 }
 
-function readStored(): { servers: Server[]; selectedId: string; dark: boolean } | null {
+function readStored(): Persisted | null {
   if (typeof window === "undefined") return null;
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -101,25 +112,48 @@ function readStored(): { servers: Server[]; selectedId: string; dark: boolean } 
   }
 }
 
+function getPersisted() {
+  if (!clientPersisted) clientPersisted = readStored() ?? fallbackPersisted;
+  return clientPersisted;
+}
+
+function writePersisted(next: Persisted) {
+  clientPersisted = next;
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  persistedListeners.forEach((listener) => listener());
+}
+
+function subscribePersisted(listener: () => void) {
+  persistedListeners.add(listener);
+  return () => persistedListeners.delete(listener);
+}
+
 export function ChengPreview() {
-  const [servers, setServers] = useState<Server[]>(() => readStored()?.servers ?? samples);
-  const [selectedId, setSelectedId] = useState(() => readStored()?.selectedId ?? "tokyo");
+  const persisted = useSyncExternalStore(subscribePersisted, getPersisted, () => fallbackPersisted);
+  const { servers, selectedId, dark } = persisted;
+  const setServers = (action: Server[] | ((current: Server[]) => Server[])) => {
+    const current = getPersisted();
+    writePersisted({
+      ...current,
+      servers: typeof action === "function" ? action(current.servers) : action,
+    });
+  };
+  const setSelectedId = (id: string) => writePersisted({ ...getPersisted(), selectedId: id });
+  const setDark = (action: boolean | ((current: boolean) => boolean)) => {
+    const current = getPersisted();
+    writePersisted({
+      ...current,
+      dark: typeof action === "function" ? action(current.dark) : action,
+    });
+  };
   const [group, setGroup] = useState("全部");
   const [running, setRunning] = useState(false);
   const [testing, setTesting] = useState(false);
-  const [dark, setDark] = useState(() => readStored()?.dark ?? false);
   const [query, setQuery] = useState("");
   const [searching, setSearching] = useState(false);
   const [sheet, setSheet] = useState<Sheet>("none");
   const [draft, setDraft] = useState("");
   const [importError, setImportError] = useState("");
-
-  useEffect(() => {
-    window.localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ servers, selectedId, dark }),
-    );
-  }, [servers, selectedId, dark]);
 
   const groups = useMemo(() => {
     const names = Array.from(new Set(servers.map((server) => server.group)));
