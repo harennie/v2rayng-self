@@ -36,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -50,11 +51,15 @@ import com.v2ray.ang.R
 import com.v2ray.ang.dto.LocateTarget
 import com.v2ray.ang.dto.entities.ProfileItem
 import com.v2ray.ang.ui.compose.ItemDivider
+import com.v2ray.ang.ui.compose.LocalDarkTheme
 import com.v2ray.ang.ui.compose.ReorderableGridItem
 import com.v2ray.ang.ui.compose.ReorderableListItem
 import com.v2ray.ang.ui.compose.colorConfigType
+import com.v2ray.ang.ui.compose.colorConfigTypeDark
 import com.v2ray.ang.ui.compose.colorPing
+import com.v2ray.ang.ui.compose.colorPingDark
 import com.v2ray.ang.ui.compose.colorPingRed
+import com.v2ray.ang.ui.compose.colorPingRedDark
 import com.v2ray.ang.ui.compose.verticalScrollbar
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyGridState
@@ -314,10 +319,19 @@ private fun ServerListItem(
     } else {
         null
     }
+    val dark = LocalDarkTheme.current
+    val rowBackground = if (isSelected) {
+        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.9f)
+    } else if (dark) {
+        Color(0x9912080C)
+    } else {
+        MaterialTheme.colorScheme.surface.copy(alpha = 0.62f)
+    }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
+            .background(rowBackground)
             .semantics {
                 if (selectedStateDescription != null) {
                     stateDescription = selectedStateDescription
@@ -410,7 +424,7 @@ private fun ServerListItem(
                     row.typeDescription,
                     modifier = Modifier.weight(1f, fill = false),
                     style = MaterialTheme.typography.bodySmall,
-                    color = colorConfigType,
+                    color = if (dark) colorConfigTypeDark else colorConfigType,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -418,7 +432,11 @@ private fun ServerListItem(
                 Text(
                     testResult,
                     style = MaterialTheme.typography.bodySmall,
-                    color = if (row.testDelayMillis < 0L) colorPingRed else colorPing,
+                    color = when {
+                        row.testDelayMillis < 0L -> if (dark) colorPingRedDark else colorPingRed
+                        dark -> colorPingDark
+                        else -> colorPing
+                    },
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )

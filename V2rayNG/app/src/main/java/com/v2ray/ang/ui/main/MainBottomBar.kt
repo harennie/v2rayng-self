@@ -61,7 +61,7 @@ fun MainBottomBar(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.9f))
                 .clickable(onClick = { onAction(MainAction.TestCurrentServer) })
                 .windowInsetsPadding(WindowInsets.navigationBars)
         ) {

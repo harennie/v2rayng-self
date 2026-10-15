@@ -116,6 +116,20 @@ fun AboutScreen(
                 versionText = versionText,
                 appIdText = appIdText
             )
+            TextButton(
+                onClick = {
+                    Utils.openUri(
+                        context,
+                        "https://commons.wikimedia.org/wiki/File:Comic_Market_102_Day_2_Cosplayers_(53328287657).jpg"
+                    )
+                },
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.background_photo_credit),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
             NavigationBarsSpacer()
         }
     }
