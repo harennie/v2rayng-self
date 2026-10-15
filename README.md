@@ -11,6 +11,32 @@ A V2Ray client for Android, support [Xray core](https://github.com/XTLS/Xray-cor
 
 ---
 
+## 在自己电脑上编译这份副本
+
+包名是 `com.v2ray.haren`。`V2rayNG/app/libs/` 里已经带好 `libv2ray.aar` 和 HEV 的原生库，不用再编 NDK 或 Go。
+
+克隆后在仓库根目录执行一次，脚本会把 JDK 21 和 Android SDK 下载到本机的 `.build-env/`，并写好 `V2rayNG/local.properties`。
+
+Windows PowerShell：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\setup-build-env.ps1
+cd V2rayNG
+.\gradlew.bat :app:assemblePlaystoreDebug "-PABI_FILTERS=arm64-v8a"
+```
+
+macOS 或 Linux：
+
+```bash
+bash setup-build-env.sh
+cd V2rayNG
+./gradlew :app:assemblePlaystoreDebug -PABI_FILTERS=arm64-v8a
+```
+
+安装包在 `V2rayNG/app/build/outputs/apk/playstore/debug/`。这是调试签名，可以和官方 v2rayNG 同时安装。
+
+---
+
 ## Download / 下载
 
 Download the latest release here:

@@ -21,9 +21,6 @@ V2rayNG/app/build
 V2rayNG/build
 V2rayNG/local.properties
 
-# Ignore prebuilt native libraries (built from submodules by compile-hevtun.sh / AndroidLibXrayLite)
-V2rayNG/app/libs
-
 # Ignore APK and AAR files
 *.apk
 *.aar
@@ -33,6 +30,17 @@ signing.properties
 
 # Ignore shared object files
 *.so
+
+# The app builds against these prebuilt files. They stay in git so a clone
+# does not need the NDK, Go, or a separate libv2ray download.
+!V2rayNG/app/libs/
+!V2rayNG/app/libs/**/
+!V2rayNG/app/libs/libv2ray.aar
+!V2rayNG/app/libs/**/*.so
+V2rayNG/app/libs/**/hev-socks5-tunnel-bin
+
+# Local JDK and Android SDK downloaded by setup-build-env
+.build-env/
 
 # Ignore Google services JSON
 V2rayNG/app/google-services.json
