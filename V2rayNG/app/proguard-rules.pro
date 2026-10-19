@@ -40,12 +40,12 @@
     static void require(boolean, kotlin.jvm.functions.Function0);
 }
 
-# Remove print stack trace call
--assumenosideeffects class java.lang.Throwable {
-    public void printStackTrace();
-    public void printStackTrace(java.io.PrintStream);
-    public void printStackTrace(java.io.PrintWriter);
-}
+# Kotlin's Throwable.stackTraceToString() calls printStackTrace(PrintWriter).
+# Treating that call as side-effect free makes crash reports lose the stack.
+
+# HEV's libhev-socks5-tunnel.so looks this class up by name in JNI_OnLoad.
+-keep class com.v2ray.ang.service.TProxyService { *; }
+-keep class com.v2ray.ang.service.TProxyService$Companion { *; }
 
 # Remove Kotlin Metadata if this is an APK build (not an AAR)
 -keepattributes !kotlin.Metadata

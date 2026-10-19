@@ -29,6 +29,7 @@ import com.miku.ray.util.MessageUtil
 import com.miku.ray.util.MyContextWrapper
 import com.miku.ray.util.SoundPlayer
 import com.miku.ray.util.Utils
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -108,7 +109,8 @@ class CoreVpnService : VpnService(), ServiceControl {
         serviceScope.launch {
             val setupFailure = try {
                 if (setupVpnService()) null else "VPN setup failed"
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
+                if (e is CancellationException) throw e
                 val message = e.message?.takeUnless { it.isBlank() } ?: e.javaClass.simpleName
                 LogUtil.e(AppConfig.TAG, "StartCore-VPN: $message", e)
                 message

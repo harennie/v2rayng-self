@@ -25,26 +25,6 @@ class TProxyService(
     companion object {
         private const val WATCHDOG_INTERVAL_MS = 5_000L
         private const val STATS_LOG_INTERVAL_TICKS = 3
-
-        @JvmStatic
-        @Suppress("FunctionName")
-        private external fun TProxyStartService(configPath: String, fd: Int): Boolean
-
-        @JvmStatic
-        @Suppress("FunctionName")
-        private external fun TProxyStopService(): Boolean
-
-        @JvmStatic
-        @Suppress("FunctionName")
-        private external fun TProxyIsRunning(): Boolean
-
-        @JvmStatic
-        @Suppress("FunctionName")
-        private external fun TProxyGetStats(): LongArray?
-
-        init {
-            System.loadLibrary("hev-socks5-tunnel")
-        }
     }
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
@@ -60,12 +40,12 @@ class TProxyService(
         LogUtil.d(AppConfig.TAG, "HevSocks5Tunnel Config content:\n$configContent")
 
         try {
-            val ok = TProxyStartService(configFile.absolutePath, vpnInterface.fd)
+            val ok = com.v2ray.ang.service.TProxyService.TProxyStartService(configFile.absolutePath, vpnInterface.fd)
             started = ok
             LogUtil.i(AppConfig.TAG, "HevSocks5Tunnel TProxyStartService result: $ok")
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             started = false
-            LogUtil.e(AppConfig.TAG, "HevSocks5Tunnel exception: ${e.message}")
+            LogUtil.e(AppConfig.TAG, "HevSocks5Tunnel exception: ${e.message}", e)
         }
 
         startWatchdog()
@@ -163,8 +143,8 @@ class TProxyService(
 
         try {
             LogUtil.i(AppConfig.TAG, "TProxyStopService...")
-            TProxyStopService()
-        } catch (e: Exception) {
+            com.v2ray.ang.service.TProxyService.TProxyStopService()
+        } catch (e: Throwable) {
             LogUtil.e(AppConfig.TAG, "Failed to stop hev-socks5-tunnel", e)
         } finally {
             started = false
@@ -173,18 +153,18 @@ class TProxyService(
 
     override fun isTunnelRunning(): Boolean {
         return try {
-            TProxyIsRunning()
-        } catch (e: Exception) {
-            LogUtil.e(AppConfig.TAG, "TProxyIsRunning exception: ${e.message}")
+            com.v2ray.ang.service.TProxyService.TProxyIsRunning()
+        } catch (e: Throwable) {
+            LogUtil.e(AppConfig.TAG, "TProxyIsRunning exception: ${e.message}", e)
             false
         }
     }
 
     override fun getTunnelStats(): LongArray? {
         return try {
-            TProxyGetStats()
-        } catch (e: Exception) {
-            LogUtil.e(AppConfig.TAG, "TProxyGetStats exception: ${e.message}")
+            com.v2ray.ang.service.TProxyService.TProxyGetStats()
+        } catch (e: Throwable) {
+            LogUtil.e(AppConfig.TAG, "TProxyGetStats exception: ${e.message}", e)
             null
         }
     }
