@@ -20,5 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "v2rayNG"
+rootProject.name = "HarenRay"
 include(":app")
+include(":remixicon")

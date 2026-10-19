@@ -1,22 +1,48 @@
+import java.time.ZonedDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import com.android.build.api.variant.FilterConfiguration
+
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    id("com.jaredsburrows.license")
+    alias(libs.plugins.aboutLibraries)
+}
+
+aboutLibraries {
+    collect {
+        includeTestVariants.set(true)
+        filterVariants.addAll("debug", "release", "releaseTesting")
+    }
+}
+
+val appVersionName = "1.0.0"
+val appVersionCode = 1000
+
+val jakartaTime = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"))
+val appBuildDate = jakartaTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+val apkBuildDate = jakartaTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+
+base {
+    archivesName.set("HarenRay_$appVersionName")
 }
 
 android {
-    namespace = "com.v2ray.ang"
+    namespace = "com.miku.ray"
     compileSdk = 37
 
     defaultConfig {
         applicationId = "com.v2ray.haren"
         minSdk = 24
         targetSdk = 37
-        versionCode = 753
-        versionName = "2.3.11"
+        versionCode = appVersionCode
+        versionName = appVersionName
+        
+        resValue("string", "uwu_version_name", appVersionName)
+        resValue("string", "uwu_version_code", appVersionCode.toString())
+        resValue("string", "uwu_package_name", applicationId.toString())
+        resValue("string", "uwu_build_date", appBuildDate.toString())
 
-        val abiFilterList = (properties["ABI_FILTERS"] as? String)?.split(';')
+        val abiFilterList = (project.findProperty("ABI_FILTERS") as? String)?.split(';')
         splits {
             abi {
                 isEnable = true
@@ -36,34 +62,63 @@ android {
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    signingConfigs {
+        create("appSigning") {
+            val ksPath = project.findProperty("KS_PATH") as? String
+            if (!ksPath.isNullOrEmpty()) {
+                storeFile = file(ksPath)
+                storePassword = project.findProperty("KS_PASS") as? String
+                keyAlias = project.findProperty("KS_ALIAS") as? String
+                keyPassword = project.findProperty("KEY_PASS") as? String
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
+            }
+        }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            if (project.hasProperty("KS_PATH")) {
+                signingConfig = signingConfigs.getByName("appSigning")
+            }
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
-    }
-
-    flavorDimensions.add("distribution")
-    productFlavors {
-        create("fdroid") {
-            dimension = "distribution"
-            applicationIdSuffix = ".fdroid"
-            buildConfigField("String", "DISTRIBUTION", "\"F-Droid\"")
+        
+        debug {
+            if (project.hasProperty("KS_PATH")) {
+                signingConfig = signingConfigs.getByName("appSigning")
+            }
+            isDebuggable = true
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
-        create("playstore") {
-            dimension = "distribution"
-            buildConfigField("String", "DISTRIBUTION", "\"Play Store\"")
+
+        create("releaseTesting") {
+            initWith(getByName("release"))
+            matchingFallbacks += listOf("release")
+            if (project.hasProperty("KS_PATH")) {
+                signingConfig = signingConfigs.getByName("appSigning")
+            }
+            isDebuggable = false
+            isMinifyEnabled = true
+            isShrinkResources = true
         }
     }
 
     sourceSets {
         getByName("main") {
-            jniLibs.srcDirs("libs")
+            jniLibs.directories.add("libs")
         }
     }
 
@@ -79,69 +134,10 @@ android {
         }
     }
 
-    applicationVariants.all {
-        val variant = this
-        val isFdroid = variant.productFlavors.any { it.name == "fdroid" }
-        if (isFdroid) {
-            val versionCodes =
-                mapOf(
-                    "armeabi-v7a" to 2, "arm64-v8a" to 1, "x86" to 4, "x86_64" to 3, "universal" to 0
-                )
-
-            variant.outputs
-                .map { it as com.android.build.gradle.internal.api.ApkVariantOutputImpl }
-                .forEach { output ->
-                    val abi = output.getFilter("ABI") ?: "universal"
-                    output.outputFileName = "v2rayNG_${variant.versionName}-fdroid_${abi}.apk"
-                    if (versionCodes.containsKey(abi)) {
-                        output.versionCodeOverride =
-                            (100 * variant.versionCode + versionCodes[abi]!!).plus(5000000)
-                    } else {
-                        return@forEach
-                    }
-                }
-        } else {
-            val versionCodes =
-                mapOf("armeabi-v7a" to 4, "arm64-v8a" to 4, "x86" to 4, "x86_64" to 4, "universal" to 4)
-
-            variant.outputs
-                .map { it as com.android.build.gradle.internal.api.ApkVariantOutputImpl }
-                .forEach { output ->
-                    val abi = if (output.getFilter("ABI") != null)
-                        output.getFilter("ABI")
-                    else
-                        "universal"
-
-                    output.outputFileName = "v2rayNG_${variant.versionName}_${abi}.apk"
-                    if (versionCodes.containsKey(abi)) {
-                        output.versionCodeOverride =
-                            (1000000 * versionCodes[abi]!!).plus(variant.versionCode)
-                    } else {
-                        return@forEach
-                    }
-                }
-        }
-    }
-
     buildFeatures {
+        viewBinding = true
         buildConfig = true
-        compose = true
-    }
-
-    androidResources {
-        generateLocaleConfig = true
-        localeFilters += listOf(
-            "en",
-            "zh-rCN",
-            "zh-rTW",
-            "vi",
-            "ru",
-            "fa",
-            "ar",
-            "az",
-            "bn",
-            "bqi-rIR"
-        )
+        resValues = true
     }
 
     packaging {
@@ -149,76 +145,102 @@ android {
             useLegacyPackaging = true
         }
     }
+}
 
-    testOptions {
-        unitTests.all {
-            it.useJUnitPlatform()
-            // Treat Jupiter discovery warnings as failures: JUnit 4 failed on an invalid @Test
-            // method, such as one that returns a value, while Jupiter only warns and skips it.
-            // The key is @API(status = EXPERIMENTAL) in JUnit 6; after a JUnit upgrade, check
-            // that a temporary `@Test fun probe() = 1` still fails the unit test task.
-            it.systemProperty("junit.platform.discovery.issue.severity.critical", "WARNING")
+androidComponents {
+    onVariants { variant ->
+        val versionCodes = mapOf(
+            "armeabi-v7a" to 4, 
+            "arm64-v8a" to 4, 
+            "x86" to 4, 
+            "x86_64" to 4, 
+            "universal" to 4
+        )
+
+        variant.outputs.forEach { output ->
+            val abiFilter = output.filters.find { it.filterType == FilterConfiguration.FilterType.ABI }
+            val abi = abiFilter?.identifier ?: "universal"
+
+            if (versionCodes.containsKey(abi)) {
+                val multiplier = versionCodes[abi]!!
+                output.versionCode.set((1000000 * multiplier) + appVersionCode)
+            }
+
+            if (variant.buildType == "debug" || variant.buildType == "releaseTesting") {
+                val abiSuffix = if (abi != "universal") "-$abi" else ""
+                val buildLabel = if (variant.buildType == "releaseTesting") "test" else variant.buildType
+                output.outputFileName.set("HarenRay_$appVersionName$abiSuffix-$buildLabel-$apkBuildDate.apk")
+            }
         }
     }
-
 }
 
 dependencies {
     // Core Libraries
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar", "*.jar"))))
 
+    // Icons (RemixIcon vector drawables, kept as a separate module instead of app/res/drawable)
+    implementation(project(":remixicon"))
+
     // AndroidX Core Libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.preference.ktx)
+    implementation(libs.recyclerview)
+    implementation(libs.recyclerview.fastscroll)
+    implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.androidx.fragment)
+    implementation(libs.palette)
+    implementation(libs.play.services.location)
 
-    // Compose Libraries
-    implementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.lifecycle.runtime.compose)
-    implementation(libs.coil.compose)
-
-    debugImplementation(libs.androidx.compose.ui.tooling)
+    // UI Libraries
+    implementation(libs.material)
+    implementation(libs.editorkit)
+    implementation(libs.flexbox)
+    implementation(libs.skydoves.colorpickerview)
+    implementation(libs.qmdeve.blurview)
+    implementation(libs.com.airbnb.android.lottie)
+    implementation(libs.aboutlibraries.view)
 
     // Data and Storage Libraries
     implementation(libs.mmkv.static)
     implementation(libs.gson)
+    implementation(libs.snakeyaml)
     implementation(libs.okhttp)
 
     // Reactive and Utility Libraries
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.play.services)
 
-    // QR Code: CameraX + ZXing
-    implementation(libs.camerax.core)
-    implementation(libs.camerax.camera2)
-    implementation(libs.camerax.lifecycle)
-    implementation(libs.camerax.compose)
-    implementation(libs.core) // zxing core
+    // Language and Processing Libraries
+    implementation(libs.language.base)
+    implementation(libs.language.json)
+
+    // Intent and Utility Libraries
+    implementation(libs.zxing.lite)
+    implementation(libs.core)
+
+    // Image loading & cropping
+    implementation(libs.glide)
+    implementation(libs.ucrop)
 
     // AndroidX Lifecycle and Architecture Components
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.runtime.ktx)
 
     // Background Task Libraries
     implementation(libs.work.runtime.ktx)
     implementation(libs.work.multiprocess)
 
-    // Reorderable list
-    implementation(libs.reorderable)
-
     // Testing Libraries
-    testImplementation(platform(libs.junit.bom))
-    testImplementation(libs.junit.jupiter)
-    testRuntimeOnly(libs.junit.platform.launcher)
+    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 }

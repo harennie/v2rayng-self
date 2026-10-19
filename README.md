@@ -1,28 +1,23 @@
-# v2rayNG
+# HarenRay
 
-A V2Ray client for Android, support [Xray core](https://github.com/XTLS/Xray-core) and [v2fly core](https://github.com/v2fly/v2ray-core)
+个人使用的 Android 代理客户端。界面和功能以 [MikuRay](https://github.com/HatsuneMikuUwU/MikuRay) 为底，MikuRay 本身基于 [v2rayNG](https://github.com/2dust/v2rayNG)。核心是 [Xray](https://github.com/XTLS/Xray-core)。协议是 GPL-3.0。
 
-[![API](https://img.shields.io/badge/API-24%2B-yellow.svg?style=flat)](https://developer.android.com/about/versions/lollipop)
-[![Kotlin Version](https://img.shields.io/badge/Kotlin-2.4.0-blue.svg)](https://kotlinlang.org)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/2dust/v2rayNG)](https://github.com/2dust/v2rayNG/commits/master)
-[![CodeFactor](https://www.codefactor.io/repository/github/2dust/v2rayng/badge)](https://www.codefactor.io/repository/github/2dust/v2rayng)
-[![GitHub Releases](https://img.shields.io/github/downloads/2dust/v2rayNG/latest/total?logo=github)](https://github.com/2dust/v2rayNG/releases)
-[![Chat on Telegram](https://img.shields.io/badge/Chat%20on-Telegram-brightgreen.svg)](https://t.me/v2rayn)
+包名是 `com.v2ray.haren`，可以和官方 v2rayNG 同时安装。启动器名称是 HarenRay。
 
 ---
 
-## 在自己电脑上编译这份副本
+## 在自己电脑上编译
 
-包名是 `com.v2ray.haren`。`V2rayNG/app/libs/` 里已经带好 `libv2ray.aar` 和 HEV 的原生库，不用再编 NDK 或 Go。
+`V2rayNG/app/libs/` 里已经带好 `libv2ray.aar` 和 HEV 的原生库，不用再编 NDK 或 Go。
 
-克隆后在仓库根目录执行一次，脚本会把 JDK 21 和 Android SDK 下载到本机的 `.build-env/`，并写好 `V2rayNG/local.properties`。
+克隆后在仓库根目录执行一次。脚本会把 JDK 21 和 Android SDK 下载到本机的 `.build-env/`，并写好 `V2rayNG/local.properties`。
 
 Windows PowerShell：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\setup-build-env.ps1
 cd V2rayNG
-.\gradlew.bat :app:assemblePlaystoreDebug "-PABI_FILTERS=arm64-v8a"
+.\gradlew.bat :app:assembleDebug "-PABI_FILTERS=arm64-v8a"
 ```
 
 macOS 或 Linux：
@@ -30,10 +25,10 @@ macOS 或 Linux：
 ```bash
 bash setup-build-env.sh
 cd V2rayNG
-./gradlew :app:assemblePlaystoreDebug -PABI_FILTERS=arm64-v8a
+./gradlew :app:assembleDebug -PABI_FILTERS=arm64-v8a
 ```
 
-安装包在 `V2rayNG/app/build/outputs/apk/playstore/debug/`。这是调试签名，可以和官方 v2rayNG 同时安装。
+安装包在 `V2rayNG/app/build/outputs/apk/debug/`。这是调试签名。
 
 ---
 
@@ -55,7 +50,7 @@ Download the latest release here:
 
 ### Geoip and Geosite
 
-- geoip.dat and geosite.dat files are in `Android/data/com.v2ray.ang/files/assets` (path may differ on some Android device)
+- geoip.dat and geosite.dat files are in `Android/data/com.v2ray.haren/files/assets` (path may differ on some Android device)
 - download feature will get enhanced version in this [repo](https://github.com/Loyalsoldier/v2ray-rules-dat) (note: it needs a working proxy)
 - latest official [domain list](https://github.com/Loyalsoldier/v2ray-rules-dat) and [ip list](https://github.com/Loyalsoldier/geoip) can be imported manually
 - possible to use a third-party dat file in the same folder, like [h2y](https://guide.v2fly.org/routing/sitedata.html#%E5%A4%96%E7%BD%AE%E7%9A%84%E5%9F%9F%E5%90%8D%E6%96%87%E4%BB%B6)
@@ -64,7 +59,7 @@ More in our [wiki](https://github.com/2dust/v2rayNG/wiki)
 
 ### Geoip 与 Geosite
 
-- geoip.dat 和 geosite.dat 文件位于 `Android/data/com.v2ray.ang/files/assets`（部分设备路径可能不同）
+- geoip.dat 和 geosite.dat 文件位于 `Android/data/com.v2ray.haren/files/assets`（部分设备路径可能不同）
 - 下载功能将获取该 [仓库](https://github.com/Loyalsoldier/v2ray-rules-dat) 中的增强版本（注意：此功能需要一个可用的代理）
 - 最新官方 [域名列表](https://github.com/Loyalsoldier/v2ray-rules-dat) 和 [IP 列表](https://github.com/Loyalsoldier/geoip) 可手动导入
 - 也可在同一文件夹中使用第三方 dat 文件，例如 [h2y](https://guide.v2fly.org/routing/sitedata.html#%E5%A4%96%E7%BD%AE%E7%9A%84%E5%9F%9F%E5%90%8D%E6%96%87%E4%BB%B6)
