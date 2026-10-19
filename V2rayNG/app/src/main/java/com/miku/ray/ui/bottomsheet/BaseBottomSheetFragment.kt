@@ -79,11 +79,9 @@ abstract class BaseBottomSheetFragment : BottomSheetDialogFragment() {
                 }
             } else {
                 Glide.with(this).clear(bannerImageView)
-                bannerImageView.setImageDrawable(null)
-                bannerImageView.setBackgroundColor(
-                    bannerImageView.context.getColorAttr("colorPrimaryContainer")
-                )
-                view.findViewById<View>(R.id.view_banner_sheet_dim)?.visibility = View.GONE
+                bannerImageView.setImageResource(R.drawable.uwu_banner_sheet)
+                bannerImageView.background = null
+                view.findViewById<View>(R.id.view_banner_sheet_dim)?.visibility = View.VISIBLE
             }
             bannerImageView.tag = targetTag
         }

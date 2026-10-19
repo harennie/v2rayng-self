@@ -17,7 +17,7 @@ Windows PowerShell：
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\setup-build-env.ps1
 cd V2rayNG
-.\gradlew.bat :app:assembleDebug "-PABI_FILTERS=arm64-v8a"
+.\gradlew.bat :app:assembleRelease "-PABI_FILTERS=arm64-v8a"
 ```
 
 macOS 或 Linux：
@@ -25,10 +25,10 @@ macOS 或 Linux：
 ```bash
 bash setup-build-env.sh
 cd V2rayNG
-./gradlew :app:assembleDebug -PABI_FILTERS=arm64-v8a
+./gradlew :app:assembleRelease -PABI_FILTERS=arm64-v8a
 ```
 
-安装包在 `V2rayNG/app/build/outputs/apk/debug/`。这是调试签名。
+安装包在 `V2rayNG/app/build/outputs/apk/release/`。没有单独配置发布证书时，正式包沿用调试证书，这样可以直接覆盖安装之前的 HarenRay。
 
 ---
 

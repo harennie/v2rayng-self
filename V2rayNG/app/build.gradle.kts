@@ -15,8 +15,8 @@ aboutLibraries {
     }
 }
 
-val appVersionName = "1.0.1"
-val appVersionCode = 1001
+val appVersionName = "1.0.2"
+val appVersionCode = 1002
 
 val jakartaTime = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"))
 val appBuildDate = jakartaTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
@@ -84,8 +84,11 @@ android {
 
     buildTypes {
         release {
-            if (project.hasProperty("KS_PATH")) {
-                signingConfig = signingConfigs.getByName("appSigning")
+            // Same certificate as the earlier installs, so this release can replace them.
+            signingConfig = if (project.hasProperty("KS_PATH")) {
+                signingConfigs.getByName("appSigning")
+            } else {
+                signingConfigs.getByName("debug")
             }
             isMinifyEnabled = true
             isShrinkResources = true
@@ -166,11 +169,13 @@ androidComponents {
                 output.versionCode.set((1000000 * multiplier) + appVersionCode)
             }
 
-            if (variant.buildType == "debug" || variant.buildType == "releaseTesting") {
-                val abiSuffix = if (abi != "universal") "-$abi" else ""
-                val buildLabel = if (variant.buildType == "releaseTesting") "test" else variant.buildType
-                output.outputFileName.set("HarenRay_$appVersionName$abiSuffix-$buildLabel-$apkBuildDate.apk")
+            val abiSuffix = if (abi != "universal") "-$abi" else ""
+            val buildLabel = when (variant.buildType) {
+                "debug" -> "-debug"
+                "releaseTesting" -> "-test"
+                else -> ""
             }
+            output.outputFileName.set("HarenRay_$appVersionName$abiSuffix$buildLabel-$apkBuildDate.apk")
         }
     }
 }

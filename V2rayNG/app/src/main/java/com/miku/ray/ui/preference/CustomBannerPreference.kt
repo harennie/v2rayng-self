@@ -48,6 +48,7 @@ class CustomBannerPreference @JvmOverloads constructor(
         if (imageView != null) {
             val uriString = MmkvManager.decodeSettingsString(AppConfig.PREF_CUSTOM_THEME_BANNER_URI)
             val targetTag = uriString?.takeUnless { it.isBlank() } ?: defaultBannerTag
+            imageView.visibility = android.view.View.VISIBLE
             if (imageView.tag != targetTag) {
                 Glide.with(context.applicationContext).clear(imageView)
                 if (targetTag == defaultBannerTag) {

@@ -42,8 +42,9 @@ class BannerSettingsPreference @JvmOverloads constructor(
                     .into(view)
             } else {
                 Glide.with(view).clear(view)
-                view.setImageDrawable(null)
-                view.visibility = android.view.View.GONE
+                view.scaleType = ImageView.ScaleType.CENTER_CROP
+                view.setImageResource(R.drawable.uwu_banner_settings_art)
+                view.visibility = android.view.View.VISIBLE
             }
         }
         imageView?.let { applyLayoutParams(it) }
