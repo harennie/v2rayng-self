@@ -11,7 +11,7 @@
         android:layout_height="300dp"
         android:layout_marginStart="-100dp"
         android:padding="80dp"
-        android:src="@drawable/uwu_banner_author"
+        android:src="@drawable/uwu_banner_profile"
         app:siBorderColor="?attr/colorSecondaryContainer"
         app:siBorderWidth="3dp" />
     <ImageView

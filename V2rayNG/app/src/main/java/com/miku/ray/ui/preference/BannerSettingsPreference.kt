@@ -36,14 +36,14 @@ class BannerSettingsPreference @JvmOverloads constructor(
             )
             if (value == CUSTOM_VALUE) {
                 val uri = MmkvManager.decodeSettingsString(AppConfig.PREF_CUSTOM_BANNER_SETTINGS_CHARACTER_URI)
+                view.visibility = android.view.View.VISIBLE
                 Glide.with(view)
                     .load(uri?.takeIf { it.isNotBlank() })
-                    .placeholder(drawableFor(AppConfig.PREF_BANNER_SETTINGS_CHARACTER_DEFAULT))
-                    .error(drawableFor(AppConfig.PREF_BANNER_SETTINGS_CHARACTER_DEFAULT))
                     .into(view)
             } else {
                 Glide.with(view).clear(view)
-                view.setImageResource(resolveDrawableRes())
+                view.setImageDrawable(null)
+                view.visibility = android.view.View.GONE
             }
         }
         imageView?.let { applyLayoutParams(it) }

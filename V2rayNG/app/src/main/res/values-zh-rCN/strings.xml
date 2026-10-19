@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="test_build_info_title">测试版本</string>
-    <string name="test_build_info_message">这是 MikuRay 的测试构建版。如果发现错误，请通知群主或在 Telegram 群组中通过@群主进行反馈。\n\nTelegram 频道：%1$s</string>
-    <string name="test_build_info_channel">@uwuowoumuchannel</string>
+    <string name="test_build_info_message">这是 HarenRay 的测试构建。\n\n%1$s</string>
+    <string name="test_build_info_channel">harennie/v2rayng-self</string>
     <string name="test_build_info_dont_show_again">不再显示</string>
     <string name="app_widget_name">开关</string>
     <string name="widget_status_connected">已连接</string>
@@ -778,7 +778,7 @@
     <string name="title_pref_ws_heartbeat_period_tip">秒，0 = 禁用</string>
 
     <string name="title_banner_settings_character">设置横幅角色</string>
-    <string name="summary_banner_settings_character">选择显示在设置横幅上的初音未来插画</string>
+    <string name="summary_banner_settings_character">为设置横幅选择一张图片</string>
     <string name="banner_settings_character_custom">自定义图片</string>
     <string name="title_banner_settings_character_custom">自定义横幅角色图片</string>
     <string name="summary_banner_settings_character_custom">从设备中选择图片</string>
@@ -792,53 +792,51 @@
     <string name="banner_character_slider_margin_top_label">上边距</string>
     <string name="banner_character_slider_margin_bottom_label">下边距</string>
     <string name="banner_character_slider_margin_end_label">右边距</string>
-    <string name="uwu_banner_settings_title">你好呀……</string>
-    <string name="uwu_banner_settings_summary">"欢迎来到设置菜单,
-请选择任何你
-需要的和必须
-的功能选项"</string>
+    <string name="uwu_banner_settings_title">设置</string>
+    <string name="uwu_banner_settings_summary">"从这里改界面、
+连接和路由。"</string>
     <string name="uwu_maintainer_title">本应用由以下团队维护</string>
-    <string name="uwu_maintainer_summary">HatsuneMikuUwU 开发团队</string>
+    <string name="uwu_maintainer_summary">HarenRay</string>
     <string name="uwu_name_title">应用名称</string>
     <string name="uwu_version_name_title">版本名称</string>
     <string name="uwu_version_code_title">版本代码</string>
     <string name="uwu_package_name_title">包名</string>
     <string name="uwu_mikubox_author_title">作者</string>
     <string name="uwu_build_date_title">构建日期</string>
-    <string name="uwu_update_summary">来更新 %1$s 吧，主人！</string>
+    <string name="uwu_update_summary">查看 %1$s 有没有新版本</string>
     <string name="uwu_about_version_title">关于应用</string>
     <string name="uwu_about_version_summary">点击此处或箭头图标, 了解应用更多信息.</string>
     <string name="uwu_splash_title">基于 MikuRay\nGPL-3.0</string>
     <string name="uwu_splash_summary">版本 %1$s (%2$d)</string>
 
-    <string name="uwu_miku_gender_title">性别</string>
-    <string name="uwu_miku_gender_summary">女性</string>
-    <string name="uwu_miku_birthday_title">生日</string>
-    <string name="uwu_miku_birthday_summary">8 月 31 日</string>
-    <string name="uwu_miku_age_title">年龄</string>
-    <string name="uwu_miku_age_summary">16</string>
-    <string name="uwu_miku_voice_title">声源</string>
-    <string name="uwu_miku_voice_summary">藤田咲</string>
-    <string name="uwu_miku_weight_title">体重</string>
-    <string name="uwu_miku_weight_summary">42 公斤</string>
-    <string name="uwu_miku_height_title">身高</string>
-    <string name="uwu_miku_height_summary">158 厘米</string>
-    <string name="uwu_about_miku_title">谁是 Hatsune Miku？</string>
-    <string name="uwu_about_miku_summary">初音未来(Hatsune Miku) 是 Crypton Future Media 发布的基于 Vocaloid 制作的虚拟歌手, 代号CV01. 以青绿色的长双马尾和清亮嗓音著称, 人设为16岁少女, 是全球知名虚拟偶像, 广泛活跃于音乐、演唱会及动画, 深受粉丝们喜爱.</string>
+    <string name="uwu_miku_gender_title">配色</string>
+    <string name="uwu_miku_gender_summary">绯红</string>
+    <string name="uwu_miku_birthday_title">点缀</string>
+    <string name="uwu_miku_birthday_summary">金黄</string>
+    <string name="uwu_miku_age_title">底色</string>
+    <string name="uwu_miku_age_summary">暖白</string>
+    <string name="uwu_miku_voice_title">暗色</string>
+    <string name="uwu_miku_voice_summary">酒红</string>
+    <string name="uwu_miku_weight_title">协议</string>
+    <string name="uwu_miku_weight_summary">GPL-3.0</string>
+    <string name="uwu_miku_height_title">核心</string>
+    <string name="uwu_miku_height_summary">Xray</string>
+    <string name="uwu_about_miku_title">HarenRay</string>
+    <string name="uwu_about_miku_summary">个人使用的代理客户端。界面用绯红配色，背景图之后再换。</string>
 
-    <string name="title_character_license">角色授权</string>
-    <string name="summary_character_license">初音未来及其他 Vocaloid 角色的版权归 Crypton Future Media, Inc. 所有。本应用依据 Piapro 角色授权协议(PCL)使用这些角色，该协议允许粉丝免费用于非商业用途。商业用途需另行获得 Crypton 的许可。\n\nhttps://piapro.net/en_for_creators.html</string>
+    <string name="title_character_license">来源</string>
+    <string name="summary_character_license">HarenRay 基于 MikuRay 和 v2rayNG，按 GPL-3.0 发布。名称和绯红配色属于这份个人版本。</string>
 
-    <string name="uwu_random_text_1">适合唱歌的好天气！</string>
-    <string name="uwu_random_text_2">今天也要开心哦，Master！</string>
-    <string name="uwu_random_text_3">"一起加油吧！39！"</string>
-    <string name="uwu_random_text_4">是在找大葱吗？</string>
-    <string name="uwu_random_text_5">"专心点！Ready, go！" </string>
-    <string name="uwu_random_text_6">把你Miku Miku掉哦！</string>
-    <string name="uwu_random_text_7">欢迎回来，Master！</string>
-    <string name="uwu_random_text_8">感受旋律吧..！</string>
-    <string name="uwu_random_text_9">冲向最高音！</string>
-    <string name="uwu_random_text_10">在给Miku写歌词吗？</string>
+    <string name="uwu_random_text_1">准备好了再连。</string>
+    <string name="uwu_random_text_2">先选一个配置。</string>
+    <string name="uwu_random_text_3">保持在线。</string>
+    <string name="uwu_random_text_4">今天是绯红。</string>
+    <string name="uwu_random_text_5">慢慢来。</string>
+    <string name="uwu_random_text_6">欢迎回来。</string>
+    <string name="uwu_random_text_7">东西都在这里。</string>
+    <string name="uwu_random_text_8">背景以后再换。</string>
+    <string name="uwu_random_text_9">一步一步来。</string>
+    <string name="uwu_random_text_10">这是你的。</string>
 
     <string name="uwu_greeting_morning">早上好...</string>
     <string name="uwu_greeting_afternoon">下午好...</string>
@@ -953,12 +951,12 @@
     <string name="uwu_next">继续</string>
     <string name="uwu_start">开始</string>
     <string name="uwu_welcome_title">欢迎来到</string>
-    <string name="uwu_welcome_summary_1">MikuRay,</string>
-    <string name="uwu_welcome_summary_2">Android 上的 V2Ray/Xray 客户端，采用 Miku UI 风格。</string>
+    <string name="uwu_welcome_summary_1">HarenRay,</string>
+    <string name="uwu_welcome_summary_2">Android 上的 V2Ray/Xray 客户端，绯红界面。</string>
     <string name="uwu_welcome_summary_3">用爱、Kotlin、Java 代码等精心打造。</string>
     <string name="uwu_welcome_page1_desc">免费开源的 Android V2Ray/Xray 客户端。</string>
     <string name="uwu_welcome_page2_desc">支持 VLESS、VMess、Trojan、Shadowsocks 等协议。</string>
-    <string name="uwu_welcome_page3_desc">在可爱的 Miku 风格设计中，体验快速且安全的网络连接。</string>
+    <string name="uwu_welcome_page3_desc">用绯红界面连接网络。</string>
 
     <string name="sub_setting_tab_icon">标签页图标</string>
     <string name="sub_setting_tab_icon_hint">在标签栏的分组名称旁边显示</string>

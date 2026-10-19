@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name" translatable="false">HarenRay</string>
     <string name="test_build_info_title">Test build</string>
-    <string name="test_build_info_message">This is a test build of MikuRay. If you find a bug, please notify the owner or report it in the Telegram group by tagging the owner.\n\nTelegram channel: %1$s</string>
-    <string name="test_build_info_channel">@uwuowoumuchannel</string>
+    <string name="test_build_info_message">This is a test build of HarenRay.\n\n%1$s</string>
+    <string name="test_build_info_channel">harennie/v2rayng-self</string>
     <string name="test_build_info_dont_show_again">Don’t show again</string>
     <string name="app_widget_name">Switch</string>
     <string name="app_widget_traffic_detail_name">Traffic Detail</string>
@@ -161,12 +161,12 @@
     <string name="uwu_next">Next</string>
     <string name="uwu_start">Start</string>
     <string name="uwu_welcome_title">Welcome to</string>
-    <string name="uwu_welcome_summary_1">MikuRay,</string>
-    <string name="uwu_welcome_summary_2">V2Ray/Xray client for Android with a Miku UI style.</string>
+    <string name="uwu_welcome_summary_1">HarenRay,</string>
+    <string name="uwu_welcome_summary_2">A V2Ray/Xray client for Android, in scarlet.</string>
     <string name="uwu_welcome_summary_3">Made with Heart, Kotlin, Java code and more.</string>
     <string name="uwu_welcome_page1_desc">Free and open source V2Ray/Xray client for Android.</string>
     <string name="uwu_welcome_page2_desc">Supports VLESS, VMess, Trojan, Shadowsocks, and more.</string>
-    <string name="uwu_welcome_page3_desc">Experience fast, secure internet wrapped in a cute Miku-inspired design.</string>
+    <string name="uwu_welcome_page3_desc">Connect through a scarlet interface.</string>
 
     <string name="toast_asset_copy_failed">File copy failed, please use File Manager</string>
     <string name="menu_item_add_asset">Add asset</string>
@@ -812,7 +812,7 @@ Package Name — only supported when using Xray TUN, routeOnly enabled, and Andr
     <string name="title_pref_ws_heartbeat_period_tip">Seconds, 0 = disabled</string>
 
     <string name="title_banner_settings_character">Settings banner character</string>
-    <string name="summary_banner_settings_character">Choose which Hatsune Miku artwork appears on the settings banner</string>
+    <string name="summary_banner_settings_character">Choose an image for the settings banner</string>
     <string name="banner_settings_character_custom">Custom image</string>
     <string name="title_banner_settings_character_custom">Custom banner character image</string>
     <string name="summary_banner_settings_character_custom">Choose an image from your device</string>
@@ -826,53 +826,53 @@ Package Name — only supported when using Xray TUN, routeOnly enabled, and Andr
     <string name="banner_character_slider_margin_top_label">Top margin</string>
     <string name="banner_character_slider_margin_bottom_label">Bottom margin</string>
     <string name="banner_character_slider_margin_end_label">End margin</string>
-    <string name="uwu_banner_settings_title">Hello there...</string>
+    <string name="uwu_banner_settings_title">Settings</string>
     <string name="uwu_banner_settings_summary">"Welcome to the settings
 menu, please select
 whichever option
 you need."</string>
     <string name="uwu_maintainer_title">This app is under maintenance</string>
-    <string name="uwu_maintainer_summary">HatsuneMikuUwU Development</string>
+    <string name="uwu_maintainer_summary">HarenRay</string>
     <string name="uwu_name_title">App Name</string>
     <string name="uwu_version_name_title">Version Name</string>
     <string name="uwu_version_code_title">Version Code</string>
     <string name="uwu_package_name_title">Package Name</string>
     <string name="uwu_mikubox_author_title">Author</string>
     <string name="uwu_build_date_title">Build Date</string>
-    <string name="uwu_update_summary">"Let\'s update %1$s master!"</string>
+    <string name="uwu_update_summary">Check whether %1$s has a new version</string>
     <string name="uwu_about_version_title">About app</string>
     <string name="uwu_about_version_summary">Tap here or arrow icon to know more about the app.</string>
     <string name="uwu_splash_title">Based on MikuRay\nGPL-3.0</string>
     <string name="uwu_splash_summary">Version %1$s (%2$d)</string>
 
-    <string name="uwu_miku_gender_title">Gender </string>
-    <string name="uwu_miku_gender_summary">Female</string>
-    <string name="uwu_miku_birthday_title">Birthday </string>
-    <string name="uwu_miku_birthday_summary">August 31</string>
-    <string name="uwu_miku_age_title">Age </string>
-    <string name="uwu_miku_age_summary">16</string>
-    <string name="uwu_miku_voice_title">Voice </string>
-    <string name="uwu_miku_voice_summary">Saki Fujita</string>
-    <string name="uwu_miku_weight_title">Weight </string>
-    <string name="uwu_miku_weight_summary">42 kg</string>
-    <string name="uwu_miku_height_title">Height </string>
-    <string name="uwu_miku_height_summary">158 cm</string>
-    <string name="uwu_about_miku_title">Who is Hatsune Miku?</string>
-    <string name="uwu_about_miku_summary">Hatsune Miku is a Vocaloid-based virtual singer released by Crypton Future Media, code-named CV01. Known for her long turquoise twintails and clear voice, she is a 16-year-old girl and a globally renowned virtual idol. She is active in music, concerts, and anime, and is deeply loved by her fans.</string>
+    <string name="uwu_miku_gender_title">Color </string>
+    <string name="uwu_miku_gender_summary">Scarlet</string>
+    <string name="uwu_miku_birthday_title">Accent </string>
+    <string name="uwu_miku_birthday_summary">Gold</string>
+    <string name="uwu_miku_age_title">Surface </string>
+    <string name="uwu_miku_age_summary">Warm white</string>
+    <string name="uwu_miku_voice_title">Night </string>
+    <string name="uwu_miku_voice_summary">Wine</string>
+    <string name="uwu_miku_weight_title">License </string>
+    <string name="uwu_miku_weight_summary">GPL-3.0</string>
+    <string name="uwu_miku_height_title">Core </string>
+    <string name="uwu_miku_height_summary">Xray</string>
+    <string name="uwu_about_miku_title">HarenRay</string>
+    <string name="uwu_about_miku_summary">A personal proxy client. The interface uses a scarlet palette. Background art can be added later.</string>
 
-    <string name="title_character_license">Character License</string>
-    <string name="summary_character_license">Hatsune Miku and other Vocaloid characters are the property of Crypton Future Media, Inc. This app uses them under the Piapro Character License (PCL), which permits free, non-commercial fan use. Commercial use requires separate permission from Crypton.\n\nhttps://piapro.net/en_for_creators.html</string>
+    <string name="title_character_license">Source</string>
+    <string name="summary_character_license">HarenRay is based on MikuRay and v2rayNG and is distributed under GPL-3.0. The name and scarlet theme belong to this personal build.</string>
 
-    <string name="uwu_random_text_1">Beautiful day for a song!</string>
-    <string name="uwu_random_text_2">Have a great day, Master!</string>
-    <string name="uwu_random_text_3">"Let\'s do our best! 39!"</string>
-    <string name="uwu_random_text_4">Looking for a leek?</string>
-    <string name="uwu_random_text_5">"Focus! Ready, go!"</string>
-    <string name="uwu_random_text_6">Miku-Miku ni shite ageru!</string>
-    <string name="uwu_random_text_7">Welcome back, Master!</string>
-    <string name="uwu_random_text_8">Let the music in..!</string>
-    <string name="uwu_random_text_9">Reach the highest note!</string>
-    <string name="uwu_random_text_10">Writing lyrics for me?</string>
+    <string name="uwu_random_text_1">Ready when you are.</string>
+    <string name="uwu_random_text_2">Pick a config to start.</string>
+    <string name="uwu_random_text_3">Stay connected.</string>
+    <string name="uwu_random_text_4">Scarlet for today.</string>
+    <string name="uwu_random_text_5">Take your time.</string>
+    <string name="uwu_random_text_6">Welcome back.</string>
+    <string name="uwu_random_text_7">Everything is in place.</string>
+    <string name="uwu_random_text_8">Backgrounds can wait.</string>
+    <string name="uwu_random_text_9">One step at a time.</string>
+    <string name="uwu_random_text_10">This one is yours.</string>
 
     <string name="uwu_greeting_morning">Good morning...</string>
     <string name="uwu_greeting_afternoon">Good afternoon...</string>

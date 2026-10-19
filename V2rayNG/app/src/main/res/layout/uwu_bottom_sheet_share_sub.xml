@@ -51,7 +51,7 @@
                             android:layout_height="150dp"
                             android:elevation="0dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/uwu_banner_sheet" />
+                            android:src="@android:color/transparent" />
                         <View
                             android:id="@+id/view_banner_sheet_dim"
                             android:layout_width="match_parent"
