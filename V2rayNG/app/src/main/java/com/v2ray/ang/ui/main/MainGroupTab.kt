@@ -34,7 +34,7 @@ fun GroupTabBar(
         selectedTabIndex = selectedIndex,
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.88f)),
+            .background(MaterialTheme.colorScheme.surface),
         edgePadding = 16.dp,
         indicator = { tabPositions ->
             TabRowDefaults.SecondaryIndicator(

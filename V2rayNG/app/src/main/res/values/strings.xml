@@ -28,6 +28,11 @@
 
     <!--ServerActivity-->
     <string name="title_server">Config</string>
+    <string name="home_greeting_morning">Good morning</string>
+    <string name="home_greeting_afternoon">Good afternoon</string>
+    <string name="home_greeting_evening">Good evening</string>
+    <string name="home_greeting_night">Good night</string>
+    <string name="home_banner_name">Flandre</string>
     <string name="menu_item_add_config">Add config</string>
     <string name="menu_item_save_config">Save config</string>
     <string name="menu_item_edit_config">Edit config</string>

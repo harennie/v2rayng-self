@@ -28,6 +28,11 @@
 
     <!--ServerActivity-->
     <string name="title_server">فایل کانفیگ</string>
+    <string name="home_greeting_morning">سُوَه بخِیر</string>
+    <string name="home_greeting_afternoon">ظُهر بخِیر</string>
+    <string name="home_greeting_evening">غروب بخِیر</string>
+    <string name="home_greeting_night">شُو بخِیر</string>
+    <string name="home_banner_name">فلاندور</string>
     <string name="menu_item_add_config">ٱووردن کانفیگ</string>
     <string name="menu_item_save_config">زفت کردن کانفیگ</string>
     <string name="menu_item_edit_config">آلشتکاری کانفیگ</string>

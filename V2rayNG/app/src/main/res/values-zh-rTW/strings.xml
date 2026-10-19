@@ -28,6 +28,11 @@
 
     <!--ServerActivity-->
     <string name="title_server">設定檔</string>
+    <string name="home_greeting_morning">早安</string>
+    <string name="home_greeting_afternoon">午安</string>
+    <string name="home_greeting_evening">晚上好</string>
+    <string name="home_greeting_night">晚安</string>
+    <string name="home_banner_name">芙蘭朵露</string>
     <string name="menu_item_add_config">新增設定</string>
     <string name="menu_item_save_config">儲存設定</string>
     <string name="menu_item_edit_config">編輯設定檔</string>

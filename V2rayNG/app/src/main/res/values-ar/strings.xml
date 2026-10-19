@@ -28,6 +28,11 @@
 
     <!--ServerActivity-->
     <string name="title_server">ملف التكوين</string>
+    <string name="home_greeting_morning">صباح الخير</string>
+    <string name="home_greeting_afternoon">طاب يومك</string>
+    <string name="home_greeting_evening">مساء الخير</string>
+    <string name="home_greeting_night">تصبح على خير</string>
+    <string name="home_banner_name">فلاندور</string>
     <string name="menu_item_add_config">إضافة تكوين</string>
     <string name="menu_item_save_config">حفظ التكوين</string>
     <string name="menu_item_edit_config">تعديل التكوين</string>

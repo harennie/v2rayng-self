@@ -28,6 +28,11 @@
 
     <!--ServerActivity-->
     <string name="title_server">Konfiqurasiya</string>
+    <string name="home_greeting_morning">Sabahın xeyir</string>
+    <string name="home_greeting_afternoon">Günortan xeyir</string>
+    <string name="home_greeting_evening">Axşamın xeyir</string>
+    <string name="home_greeting_night">Gecən xeyir</string>
+    <string name="home_banner_name">Flandre</string>
     <string name="menu_item_add_config">Konfiqurasiya əlavə et</string>
     <string name="menu_item_save_config">Konfiqurasiyanı saxla</string>
     <string name="menu_item_edit_config">Konfiqurasiyanı redaktə et</string>

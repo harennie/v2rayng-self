@@ -1,6 +1,5 @@
 package com.v2ray.ang.ui.main
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,11 +14,7 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.rememberDrawerState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import com.v2ray.ang.R
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -32,7 +27,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.v2ray.ang.dto.entities.ProfileItem
@@ -145,13 +139,6 @@ fun MainScreen(
     }
 
     Box(Modifier.fillMaxSize()) {
-    Image(
-        painter = painterResource(R.drawable.bg_flandre),
-        contentDescription = null,
-        modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop,
-        alignment = Alignment.TopCenter
-    )
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -165,7 +152,7 @@ fun MainScreen(
         }
     ) {
         Scaffold(
-            containerColor = Color.Transparent,
+            containerColor = MaterialTheme.colorScheme.background,
             contentWindowInsets = ScaffoldDefaults.contentWindowInsets,
             topBar = {
                 MainTopBar(
@@ -210,14 +197,15 @@ fun MainScreen(
             },
             floatingActionButton = {},
         ) { innerPadding ->
-            val layoutDirection = LocalLayoutDirection.current
-
-            if (groups.isNotEmpty()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
-                ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            ) {
+                if (!showSearch) {
+                    MainHomeBanner()
+                }
+                if (groups.isNotEmpty()) {
                     if (groups.size > 1) {
                         GroupTabBar(
                             groups = groups,
@@ -265,7 +253,7 @@ fun MainScreen(
                                 start = 0.dp,
                                 top = 0.dp,
                                 end = 0.dp,
-                                bottom = 80.dp
+                                bottom = 12.dp
                             )
                         )
                     }

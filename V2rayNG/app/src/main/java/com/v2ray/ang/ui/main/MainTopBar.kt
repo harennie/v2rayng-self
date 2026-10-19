@@ -67,7 +67,7 @@ fun MainTopBar(
                 }
             }
         },
-        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f),
+        containerColor = MaterialTheme.colorScheme.surface,
         actions = {
             if (!showSearch) {
                 IconButton(onClick = { onSearchToggle(true) }) {

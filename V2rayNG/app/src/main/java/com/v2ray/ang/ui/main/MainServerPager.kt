@@ -321,11 +321,9 @@ private fun ServerListItem(
     }
     val dark = LocalDarkTheme.current
     val rowBackground = if (isSelected) {
-        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.9f)
-    } else if (dark) {
-        Color(0x9912080C)
+        MaterialTheme.colorScheme.primaryContainer
     } else {
-        MaterialTheme.colorScheme.surface.copy(alpha = 0.62f)
+        MaterialTheme.colorScheme.surface
     }
     Row(
         modifier = Modifier

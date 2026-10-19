@@ -28,6 +28,11 @@
 
     <!--ServerActivity-->
     <string name="title_server">কনফিগারেশন ফাইল</string>
+    <string name="home_greeting_morning">সুপ্রভাত</string>
+    <string name="home_greeting_afternoon">শুভ অপরাহ্ন</string>
+    <string name="home_greeting_evening">শুভ সন্ধ্যা</string>
+    <string name="home_greeting_night">শুভ রাত্রি</string>
+    <string name="home_banner_name">ফ্ল্যান্ড্রে</string>
     <string name="menu_item_add_config">কনফিগারেশন যোগ করুন</string>
     <string name="menu_item_save_config">কনফিগারেশন সংরক্ষণ করুন</string>
     <string name="menu_item_edit_config">কনফিগারেশন সম্পাদনা করুন</string>
