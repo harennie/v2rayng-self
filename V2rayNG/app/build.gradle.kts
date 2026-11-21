@@ -15,8 +15,8 @@ aboutLibraries {
     }
 }
 
-val appVersionName = "1.0.3"
-val appVersionCode = 1003
+val appVersionName = "1.0.4"
+val appVersionCode = 1004
 
 val jakartaTime = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"))
 val appBuildDate = jakartaTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
@@ -84,12 +84,7 @@ android {
 
     buildTypes {
         release {
-            // Same certificate as the earlier installs, so this release can replace them.
-            signingConfig = if (project.hasProperty("KS_PATH")) {
-                signingConfigs.getByName("appSigning")
-            } else {
-                signingConfigs.getByName("debug")
-            }
+            signingConfig = signingConfigs.getByName("appSigning").takeIf { it.storeFile != null }
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

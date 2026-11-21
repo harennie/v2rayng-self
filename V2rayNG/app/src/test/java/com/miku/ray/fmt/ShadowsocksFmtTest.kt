@@ -1,9 +1,9 @@
 package com.miku.ray.fmt
 
 import android.util.Base64
-import com.miku.ray.util.LogUtil
+import android.util.Log
+import com.miku.ray.dto.entities.ProfileItem
 import com.miku.ray.enums.EConfigType
-import com.miku.ray.dto.ProfileItem
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

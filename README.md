@@ -1,6 +1,8 @@
 # HarenRay
 
-个人使用的 Android 代理客户端。界面和功能以 [MikuRay](https://github.com/HatsuneMikuUwU/MikuRay) 为底，MikuRay 本身基于 [v2rayNG](https://github.com/2dust/v2rayNG)。核心是 [Xray](https://github.com/XTLS/Xray-core)。协议是 GPL-3.0。
+HarenRay 是 [MikuRay](https://github.com/HatsuneMikuUwU/MikuRay) 的独立修改版。MikuRay 基于 [v2rayNG](https://github.com/2dust/v2rayNG)，代理核心由 [Xray](https://github.com/XTLS/Xray-core) 提供。感谢上游项目和贡献者，项目源码按 [GPL-3.0](LICENSE) 发布。
+
+HarenRay 自 2026-10-19 起调整了应用名称、包名、主题和界面。2026-11-21 发布的 1.0.4 更新了 Xray 核心，并修复 Hysteria2 导入和 DNS 路由。
 
 包名是 `com.v2ray.haren`，可以和官方 v2rayNG 同时安装。启动器名称是 HarenRay。
 
@@ -28,17 +30,13 @@ cd V2rayNG
 ./gradlew :app:assembleRelease -PABI_FILTERS=arm64-v8a
 ```
 
-安装包在 `V2rayNG/app/build/outputs/apk/release/`。没有单独配置发布证书时，正式包沿用调试证书，这样可以直接覆盖安装之前的 HarenRay。
+安装包在 `V2rayNG/app/build/outputs/apk/release/`。配置 Gradle 属性 `KS_PATH`、`KS_ALIAS`、`KS_PASS` 和 `KEY_PASS` 来生成签名的发布包。可以用同名的 `ORG_GRADLE_PROJECT_` 前缀环境变量提供这些值。未配置发布密钥时，发布包不签名。
 
 ---
 
 ## Download / 下载
 
-Download the latest release here:
-
-在这里下载最新版本：
-
-[https://github.com/2dust/v2rayNG/releases](https://github.com/2dust/v2rayNG/releases)
+在 [HarenRay Releases](https://github.com/harennie/v2rayng-self/releases) 下载 APK。每个版本的发布说明都附有对应的源码标签。源码的 Git 子模块记录了 AndroidLibXrayLite 和 HEV 的版本，克隆时可加上 `--recurse-submodules`。
 
 > [!TIP]
 > v2rayNG is the mobile version. For the desktop version, please visit the v2rayN \
@@ -85,18 +83,15 @@ More in our [wiki](https://github.com/2dust/v2rayNG/wiki)
 ---
 
 
-## GPG Verification / GPG 签名校验
+## APK 签名校验
 
-Release files are signed with GPG to verify authenticity and integrity, helping prevent mirror, ISP, or CDN hijacking.
-
-发布文件已使用 GPG 签名，可用于校验文件真实性与完整性，预防镜像站、运营商或 CDN 劫持。
-
-### Fingerprint / 公钥指纹
+从 1.0.4 起，HarenRay 使用专用发布证书。用 Android SDK 的 `apksigner verify --print-certs 文件.apk` 核对签名证书的 SHA-256 指纹。
 
 ```text
-7694 5E9F 3E9A 168F 8070 F195 805D 661C
-134D FAF6 8903 C199 463C 31E5 AE90 3AE0
+5c4862cb236ff7c8a7999dc41c824d4598461e388600861d1226b933c1e82835
 ```
+
+较早的版本使用了不同的证书。迁移到 1.0.4 时，请先导出 `.mikubackup`，再卸载旧版、安装新版并还原。
 
 ---
 

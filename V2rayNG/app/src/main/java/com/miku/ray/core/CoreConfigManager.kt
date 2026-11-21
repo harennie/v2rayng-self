@@ -669,17 +669,17 @@ object CoreConfigManager {
         val remoteDns = SettingsManager.getRemoteDnsServers()
         val domesticDns = SettingsManager.getDomesticDnsServers()
 
-        remoteDns.forEach { servers.add(it) }
-
         val hosts = buildDnsHostsFromRoutingRules(configContext)
         val cnDomesticDnsTags = buildDnsCnModeFromRoutingRules(configContext, servers, domesticDns)
         val domesticDnsTags = buildDnsFromRoutingRules(
-            configContext = configContext,
+            routingDomainRules = configContext.routingDomainRules,
             servers = servers,
             remoteDns = remoteDns,
             domesticDns = domesticDns
         )
         domesticDnsTags.addAll(cnDomesticDnsTags)
+
+        servers.addAll(remoteDns)
 
         v2rayConfig.dns = V2rayConfig.DnsBean(
             servers = servers,
@@ -803,14 +803,14 @@ object CoreConfigManager {
         return cnDomesticDnsTags
     }
 
-    private fun buildDnsFromRoutingRules(
-        configContext: CoreConfigContext,
+    internal fun buildDnsFromRoutingRules(
+        routingDomainRules: List<CoreConfigContext.RoutingDomainRule>,
         servers: ArrayList<Any>,
         remoteDns: List<String>,
         domesticDns: List<String>,
     ): MutableList<String> {
         val domesticDnsTags = mutableListOf<String>()
-        configContext.routingDomainRules.forEachIndexed { ruleIndex, rule ->
+        routingDomainRules.forEachIndexed { ruleIndex, rule ->
             when (rule.outboundTag) {
                 AppConfig.TAG_DIRECT -> {
                     domesticDns.forEachIndexed { dnsIndex, address ->
@@ -820,6 +820,7 @@ object CoreConfigManager {
                                 address = address,
                                 domains = rule.domain,
                                 skipFallback = true,
+                                finalQuery = if (dnsIndex == domesticDns.lastIndex) true else null,
                                 tag = tag
                             )
                         )
@@ -828,12 +829,15 @@ object CoreConfigManager {
                 }
                 AppConfig.TAG_BLOCKED -> Unit
                 else -> {
-                    servers.add(
-                        V2rayConfig.DnsBean.ServersBean(
-                            address = remoteDns.first(),
-                            domains = rule.domain,
+                    remoteDns.forEachIndexed { index, address ->
+                        servers.add(
+                            V2rayConfig.DnsBean.ServersBean(
+                                address = address,
+                                domains = rule.domain,
+                                finalQuery = if (index == remoteDns.lastIndex) true else null
+                            )
                         )
-                    )
+                    }
                 }
             }
         }
